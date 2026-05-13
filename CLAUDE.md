@@ -13,6 +13,11 @@ python3 stockmover.py
 ## Current state (as of Day 8)
 Project scaffolded. No real logic yet — currently just prints a placeholder. Real implementation begins Day 9.
 
+## Current state (as of Day 9)
+Fetches latest closing prices for 8-stock watchlist via yfinance.
+Watchlist still hardcoded in script; will move to config.json on Day 12.
+No history comparison or alerts yet.
+
 ## Architecture
 - `stockmover.py` — main script (single file for now)
 - `config.json` — tickers, threshold, and other settings
@@ -29,7 +34,7 @@ Project scaffolded. No real logic yet — currently just prints a placeholder. R
 - Errors handled gracefully — tool should never crash on network issues
 
 ## Planned features (in build order)
-- [ ] Fetch real prices via yfinance (Day 9)
+- [x] Fetch real prices via yfinance (Day 9)
 - [ ] Persist price history (Day 10)
 - [ ] Alert logic with threshold (Day 11)
 - [ ] CLI args for overriding config (Day 12)
