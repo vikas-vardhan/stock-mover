@@ -1,0 +1,14 @@
+{
+  "tickers": [
+    "RELIANCE.NS",
+    "TCS.NS",
+    "HDFCBANK.NS",
+    "INFY.NS",
+    "ICICIBANK.NS",
+    "ITC.NS",
+    "SBIN.NS",
+    "BHARTIARTL.NS"
+  ],
+  "threshold_percent": 3.0,
+  "history_days_to_keep": 30
+}

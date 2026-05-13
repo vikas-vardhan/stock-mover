@@ -1,0 +1,3 @@
+# Dependencies for Stock Mover
+# Add packages here as we use them
+# Format: package-name==version (version optional)
