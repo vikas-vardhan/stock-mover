@@ -18,6 +18,13 @@ Fetches latest closing prices for 8-stock watchlist via yfinance.
 Watchlist still hardcoded in script; will move to config.json on Day 12.
 No history comparison or alerts yet.
 
+## Current state (as of Day 10)
+- Fetches latest closing prices for 8-stock watchlist
+- Persists price data to `history.json` between runs
+- Compares today's close to most recent prior close
+- Calculates percentage change (no alert threshold yet)
+- Handles same-day re-runs without polluting history
+
 ## Architecture
 - `stockmover.py` — main script (single file for now)
 - `config.json` — tickers, threshold, and other settings
@@ -35,7 +42,7 @@ No history comparison or alerts yet.
 
 ## Planned features (in build order)
 - [x] Fetch real prices via yfinance (Day 9)
-- [ ] Persist price history (Day 10)
+- [x] Persist price history (Day 10)
 - [ ] Alert logic with threshold (Day 11)
 - [ ] CLI args for overriding config (Day 12)
 - [ ] Email alerts (Day 13, stretch)
@@ -45,3 +52,4 @@ No history comparison or alerts yet.
 - Prefer simple, readable code over clever shortcuts
 - Always explain before changing files
 - Git operations are done manually by the user, not from inside Claude Code
+
