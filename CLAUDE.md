@@ -33,6 +33,20 @@ No history comparison or alerts yet.
 - Outputs a formatted daily report with alerts, non-alerts, and missing-data sections
 - Code organized into named functions for clarity and future extension
 
+## Current state (as of Day 12)
+- Fetches latest closing prices for a configurable watchlist
+- All settings (tickers, threshold) externalized to config.json
+- Graceful handling of missing/malformed config
+- Command-line --threshold override for one-off runs
+- --help auto-generated usage screen
+- Persists history, applies threshold, prints formatted report
+
+## How to use it
+source venv/bin/activate
+python3 stockmover.py                  # uses config.json settings
+python3 stockmover.py --threshold 5    # override threshold for this run
+python3 stockmover.py --help           # show usage
+
 ## Architecture
 - `stockmover.py` — main script (single file for now)
 - `config.json` — tickers, threshold, and other settings
@@ -52,7 +66,7 @@ No history comparison or alerts yet.
 - [x] Fetch real prices via yfinance (Day 9)
 - [x] Persist price history (Day 10)
 - [x] Alert logic with threshold (Day 11)
-- [ ] CLI args for overriding config (Day 12)
+- [x] CLI args for overriding config (Day 12)
 - [ ] Email alerts (Day 13, stretch)
 
 ## What Claude Code should know
