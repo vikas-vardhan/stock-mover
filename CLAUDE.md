@@ -25,6 +25,14 @@ No history comparison or alerts yet.
 - Calculates percentage change (no alert threshold yet)
 - Handles same-day re-runs without polluting history
 
+## Current state (as of Day 11)
+- Fetches latest closing prices for 8-stock watchlist
+- Persists price data to `history.json` between runs
+- Compares today's close to previous (pre-today) close
+- Applies configurable threshold (currently 3%) to identify meaningful moves
+- Outputs a formatted daily report with alerts, non-alerts, and missing-data sections
+- Code organized into named functions for clarity and future extension
+
 ## Architecture
 - `stockmover.py` — main script (single file for now)
 - `config.json` — tickers, threshold, and other settings
@@ -43,7 +51,7 @@ No history comparison or alerts yet.
 ## Planned features (in build order)
 - [x] Fetch real prices via yfinance (Day 9)
 - [x] Persist price history (Day 10)
-- [ ] Alert logic with threshold (Day 11)
+- [x] Alert logic with threshold (Day 11)
 - [ ] CLI args for overriding config (Day 12)
 - [ ] Email alerts (Day 13, stretch)
 
