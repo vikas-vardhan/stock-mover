@@ -65,24 +65,26 @@ def load_config():
     return config
 
 
-def fetch_latest_close(ticker_symbol):
-    """Fetch the most recent closing price for a single ticker."""
+def fetch_two_closes(ticker_symbol):
+    """
+    Fetch the previous trading day's close and the latest close
+    for a single ticker. Requests a 5-day window for reliability
+    (period='2d' can return only one row near holidays/weekends),
+    then uses the most recent two rows.
+    Returns a tuple: (previous_close, latest_close).
+    Either value may be None if data is insufficient.
+    """
     ticker = yf.Ticker(ticker_symbol)
-    data = ticker.history(period="2d")
-    return float(data["Close"].iloc[-1])
+    data = ticker.history(period="5d")
 
+    closes = data["Close"]
 
-def get_previous_close(history, ticker_symbol, today_str):
-    """
-    Return the most recent close BEFORE today for this ticker,
-    or None if no prior data exists.
-    """
-    entries = history.get(ticker_symbol, [])
-    # Walk backward through entries, skip any from today
-    for entry in reversed(entries):
-        if entry["date"] != today_str:
-            return entry["close"]
-    return None
+    if len(closes) == 0:
+        return (None, None)
+    elif len(closes) == 1:
+        return (None, float(closes.iloc[-1]))
+    else:
+        return (float(closes.iloc[-2]), float(closes.iloc[-1]))
 
 
 def update_history(history, ticker_symbol, today_str, close):
@@ -161,10 +163,14 @@ def main():
     no_data = []
     
     for ticker_symbol in tickers:
-        latest_close = fetch_latest_close(ticker_symbol)
-        previous_close = get_previous_close(history, ticker_symbol, today_str)
+        previous_close, latest_close = fetch_two_closes(ticker_symbol)
+        
+        if latest_close is None:
+            no_data.append(ticker_symbol)
+            continue  # skip to next ticker — nothing to record or compare
         
         if previous_close is None:
+            # Have today's price but no previous to compare against
             no_data.append(ticker_symbol)
         else:
             change = percent_change(previous_close, latest_close)
@@ -173,6 +179,7 @@ def main():
             else:
                 quiet.append(ticker_symbol)
         
+        # Still record today's close in history (for future trend features)
         update_history(history, ticker_symbol, today_str, latest_close)
     
     # Print alerts section

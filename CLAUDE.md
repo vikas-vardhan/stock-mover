@@ -42,10 +42,12 @@ No history comparison or alerts yet.
 - Persists history, applies threshold, prints formatted report
 
 ## How to use it
+```
 source venv/bin/activate
 python3 stockmover.py                  # uses config.json settings
 python3 stockmover.py --threshold 5    # override threshold for this run
 python3 stockmover.py --help           # show usage
+```
 
 ## Architecture
 - `stockmover.py` — main script (single file for now)
