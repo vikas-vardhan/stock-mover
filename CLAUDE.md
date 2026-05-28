@@ -41,6 +41,14 @@ No history comparison or alerts yet.
 - --help auto-generated usage screen
 - Persists history, applies threshold, prints formatted report
 
+## Current state (as of Day 13)
+- Fetches previous trading day + latest close in one call per ticker
+- Comparison always reflects a TRUE single-day move, regardless of when the tool is run
+- Independent of run schedule — gaps in usage don't distort results
+- history.json now serves as a record for future trend features, not the comparison mechanism
+- Handles edge cases: zero data, single-day-only data
+- Config-driven watchlist and threshold, CLI override, formatted report
+
 ## How to use it
 ```
 source venv/bin/activate

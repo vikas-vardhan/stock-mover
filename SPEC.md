@@ -31,3 +31,8 @@ Creating a small problem solving project end-to-end using python and libraries.
 
 ## Open Questions
 I wil note them down as the project preogresses.
+
+## Design decisions
+- Daily comparison uses market data's previous trading day (iloc[-2]),
+  not the history file. This keeps results correct even if the tool is
+  run irregularly. History is a record, not the comparison source.
